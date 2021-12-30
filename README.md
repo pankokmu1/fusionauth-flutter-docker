@@ -1,9 +1,9 @@
-Flutter AppAuth + FusionAuth + Docker
-===============
+# Flutter AppAuth + FusionAuth + Docker
 
 Project developed to reproduce a bug of the Flutter AppAuth plugin. All data for this project is not real. All project keys were randomly generated on the Internet.
 
-----------
+---
+
 ### Initialize the project:
 
 To start, clone the repository, cd to it and run the command below.
@@ -12,18 +12,21 @@ To start, clone the repository, cd to it and run the command below.
 docker-compose up -d --build
 ```
 
-----------
+---
+
 ### Description of container ports:
 
 - **9011** Used for **FusionAuth**.
 - **5432** Used by **Postgres**.
 
-----------
+---
+
 ### How to access **FusionAuth** Dashboard:
 
 After initializing the containers, access http://localhost:9011 with username: `lima@jhordan.com` and password: `jhordan123` to access FusionAuth dashboard.
 
-----------
+---
+
 ### Demonstrating the bug:
 
 After initializing the containers, build the flutter application and try to authenticate with FusionAuth. Note that FusionAuth is serving as an identity provider for other services. An error like the example below is expected.
@@ -44,6 +47,7 @@ final result = await appAuth.authorizeAndExchangeCode(
         issuer: 'https://demo.identityserver.io',
         scopes: ['openid', 'profile', 'email', 'api', 'offline_access'],
         promptValues: ['login'],
+        loginHint: 'bob',
     ),
 );
 ```
